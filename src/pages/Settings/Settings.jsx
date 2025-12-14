@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useData } from "../../scripts/useData";
 import { Data } from "../../scripts/Data";
 import { showSnackbar } from "../../scripts/snackbar";
+import { Classeviva } from "../../scripts/classeviva";
 
 function Settings({ onBack = () => {} }) {
   const vibrate = useVibration();
@@ -109,6 +110,16 @@ function Settings({ onBack = () => {} }) {
         };
         reader.readAsText(file);
       }
+    });
+  }
+
+  const handleLoginCVV = () => {
+    const username = "";
+    const password = "";
+    Classeviva.getToken(username, password).then(data => {
+      console.log(data);
+    }).catch(error => {
+      showSnackbar("Error logging in to CVV: " + error.message);
     });
   }
 
@@ -378,6 +389,21 @@ function Settings({ onBack = () => {} }) {
               border="soft"
               variant="outlined"
               text="Reset data"
+            />
+          </div>
+        </div>
+        <div className={styles.settingsSection}>
+          <h3 className={styles.sectionTitle}>Developer</h3>
+          <div className={styles.settingsGrid}>
+            <label htmlFor="loginCVV" className={styles.settingLabel}>
+              Login to CVV
+            </label>
+            <Button
+              onClick={handleLoginCVV}
+              iconName="login"
+              border="soft"
+              variant="filled"
+              text="Login"
             />
           </div>
         </div>

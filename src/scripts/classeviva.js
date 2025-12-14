@@ -1,18 +1,15 @@
-export class Cvv {
+export class Classeviva {
 
-    static API_URL = 'http://37.187.249.154:43210/rest/v1';
-    static API_KEY = import.meta.env.VITE_CVV_Z_DEV_API_KEY;
+    static API_URL = import.meta.env.VITE_CVV_API_URL;
     static studentId = "";
     static sessionToken = "";
 
     static async getToken(username, password) {
         try {
-            const response = await fetch(`${Cvv.API_URL}/auth/login`, {
+            const response = await fetch(`${this.API_URL}/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'User-Agent': 'CVVS/std/4.1.7 Android/10',
-                    'Z-Dev-Apikey': this.API_KEY,
                 },
                 body: JSON.stringify({
                     'uid': username,
@@ -24,18 +21,16 @@ export class Cvv {
             return data;
         } catch (error) {
             console.error('GET Error:', error);
-            return data;
+            return null;
         }
     }
 
     static async getGrades() {
         try {
-            const response = await fetch(`${Cvv.API_URL}/students/${this.studentId}/grades/?ffilter=grades(displayValue)`, {
+            const response = await fetch(`${this.API_URL}/students/${this.studentId}/grades/?ffilter=grades(displayValue)`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'User-Agent': 'CVVS/std/4.1.7 Android/10',
-                    'Z-Dev-Apikey': this.API_KEY,
                     'Z-Auth-Token': this.sessionToken
                 },
             });
@@ -44,19 +39,17 @@ export class Cvv {
             return data;
         } catch (error) {
             console.error('GET Error:', error);
-            return data;
+            return null;
         }
     }
 
     static async getAbsences() {
         try {
             // ABA0 = full (red) day absence
-            const response = await fetch(`${Cvv.API_URL}/students/${this.studentId}/absences/details/?dfilter=events(evtCode=ABA0)`, {
+            const response = await fetch(`${this.API_URL}/students/${this.studentId}/absences/details/?dfilter=events(evtCode=ABA0)`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'User-Agent': 'CVVS/std/4.1.7 Android/10',
-                    'Z-Dev-Apikey': this.API_KEY,
                     'Z-Auth-Token': this.sessionToken
                 },
             });
@@ -65,19 +58,17 @@ export class Cvv {
             return data;
         } catch (error) {
             console.error('GET Error:', error);
-            return data;
+            return null;
         }
     }
 
     static async getDelays() {
         try {
             // ABR0 = delay (orange)
-            const response = await fetch(`${Cvv.API_URL}/students/${this.studentId}/absences/details/?dfilter=events(evtCode=ABR0)`, {
+            const response = await fetch(`${this.API_URL}/students/${this.studentId}/absences/details/?dfilter=events(evtCode=ABR0)`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'User-Agent': 'CVVS/std/4.1.7 Android/10',
-                    'Z-Dev-Apikey': this.API_KEY,
                     'Z-Auth-Token': this.sessionToken
                 },
             });
@@ -86,7 +77,7 @@ export class Cvv {
             return data;
         } catch (error) {
             console.error('GET Error:', error);
-            return data;
+            return null;
         }
     }
 
@@ -97,12 +88,10 @@ export class Cvv {
             // NTCL: note sul registro
             // NTWN: richiami
             // NTST: sanzioni disciplinari
-            const response = await fetch(`${Cvv.API_URL}/students/${this.studentId}/notes/all/`, {
+            const response = await fetch(`${this.API_URL}/students/${this.studentId}/notes/all/`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'User-Agent': 'CVVS/std/4.1.7 Android/10',
-                    'Z-Dev-Apikey': this.API_KEY,
                     'Z-Auth-Token': this.sessionToken
                 },
             });
@@ -111,7 +100,7 @@ export class Cvv {
             return data;
         } catch (error) {
             console.error('GET Error:', error);
-            return data;
+            return null;
         }
     }
 
@@ -121,12 +110,10 @@ export class Cvv {
             // HAT1: presente fuori aula
             // HAB0: assente a lezione
             // HNN0: ora senza lezione
-            const response = await fetch(`${Cvv.API_URL}/students/${this.studentId}/lessons-status/today`, {
+            const response = await fetch(`${this.API_URL}/students/${this.studentId}/lessons-status/today`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'User-Agent': 'CVVS/std/4.1.7 Android/10',
-                    'Z-Dev-Apikey': this.API_KEY,
                     'Z-Auth-Token': this.sessionToken
                 },
             });
@@ -135,7 +122,7 @@ export class Cvv {
             return data;
         } catch (error) {
             console.error('GET Error:', error);
-            return data;
+            return null;
         }
     }
 }

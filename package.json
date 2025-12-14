@@ -10,11 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@biomejs/biome": "^2.3.8",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.1.0",
     "framer-motion": "^12.6.2",
     "lucide-react": "^0.485.0",
     "material-symbols": "^0.27.2",
+    "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-swipeable": "^7.0.2",
